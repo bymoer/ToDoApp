@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  mongo:
+    container_name: mongotodo
+    image: mongo:4.4.6
+    restart: unless-stopped
+    volumes:
+      - mongodb:/data/db
+
+  vscode:
+    container_name: vscodetodo
+    image: mcr.microsoft.com/devcontainers/typescript-node:0-18-buster
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspace
+    user: node
+    init: true
+    depends_on:
+      - mongo
+
+  nginx:
+    container_name: nginxtodo
+    image: nginx:latest
+    restart: unless-stopped
+    volumes:
+     - type: bind
+       source: ./nginx.conf
+       target: /etc/nginx/nginx.conf
+       read_only: true
+    depends_on:
+      - vscode
+volumes:
+  mongodb:

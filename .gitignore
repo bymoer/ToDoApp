@@ -1,0 +1,7 @@
+node_modules
+/build
+/dist
+/todobackend/node_modules
+/todobackend/dist
+/todofrontend/node_modules
+/todofrontend/dist

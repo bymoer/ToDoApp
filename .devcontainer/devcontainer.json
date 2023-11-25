@@ -1,0 +1,44 @@
+{
+    "name": "ToDo DB App",
+    "dockerComposeFile": "docker-compose.yml",
+    "shutdownAction": "stopCompose",
+    "service": "vscode",
+    "runServices": [
+        "mongo",
+        "vscode",
+        "nginx"
+    ],
+    "workspaceFolder": "/workspace",
+    "containerUser": "node",
+    "privileged": false,
+    "init": true,
+    "overrideCommand": true,
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest",
+            "moby": true,
+            "dockerDashComposeVersion": "v2"
+        },
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "os-provided",
+            "ppa": true
+        }
+    },
+    "containerEnv": {
+        "MODE_ENV": "development",
+        "CHOKIDAR_USEPOLLING": "true"
+    },
+    "forwardPorts": [
+        "nginx:80"
+    ],
+    "portsAttributes": {
+        "nginx:80": {
+            "label": "WebApp",
+            "elevateIfNeeded": true,
+            "requireLocalPort": true
+        }
+    },
+    "otherPortsAttributes": {
+        "onAutoForward": "silent"
+    }
+}
