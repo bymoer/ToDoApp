@@ -16,6 +16,7 @@ Frontend:
 - Socket.IO client
 - Webpack
 - Babel
+- SASS / SCSS
 - (other stuff - loaders and such)
 
 Container stuff:
